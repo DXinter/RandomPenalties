@@ -1,15 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Penalty
 {
     class Program
     {
         static Random r = new Random();
-        static void Main(string[] args)
-        {          
-            List<string> pen = new List<string>();
-            string[] mockery = new string[] { "Тебе понравится!", 
+        const string s = "'A' - добавить жести; 'C' - очистить консоль; I - показать наказания";                 
+        static void Main()
+        {
+            Default();
+            MainCommands();
+        }
+
+        private static void Default()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Я хочу поиграть с тобой :)\n{s}");       
+        }
+
+        private static string MainCommands()
+        {
+            var pen = new List<string>
+            {  
+            "Пинок",
+            "Пресс 30 раз",
+            "Приседания 40 раз",
+            "Крути два раза",
+            "Предидущее наказание",
+            "Лещ",
+            "Плечо",
+            "Плохая тачка",
+            "Без зарядов",
+            "Удар в пресак",
+            "Подтягивания 10 раз",
+            "Фофан",
+            "Давай пой",
+            "Супер лещ",
+            "Годзилла"
+            };        
+            string[] mockery = new string[] 
+            { 
+                "Тебе понравится!",
                 "Будь мужиком!",
                 "О, вот повезло!",
                 "Я не буду это выполнять! ",
@@ -17,69 +50,148 @@ namespace Penalty
                 "Жопа в огне.",
                 "Одно и тоже падает.",
                 "Прикольно.",
-                "Все пацаны в росход.",
-                "Только не в коп"};
+                "Все, пацаны, в росход.",
+                "Только не в коп",
+                "Какие сладкие оттенки",
+                "Надоели мне ваши игрушки",
+                "Давай уберем это много",
+                "Чтож так не прет?!"
+            };
             string[] Fatality = new string[] { "", "", "", "", "", "", "", "", "", "X2" };
-            Console.WriteLine("Я хочу поиграть с тобой :)");
-            Set(pen);
-            MainCommands(pen, mockery, Fatality);
-        }
-        private static string MainCommands(List<string> pen, string[] mockery, string [] Fatality)
-        {
-            string operation;
+               
             while (true)
-            {               
-                operation = Convert.ToString(Console.ReadLine()).ToUpper();
-                if (operation == "C" || operation == "С")
-                    Console.Clear();
-                if (operation == "A" || operation == "Ф")
+            {                 
+                    var operation = Console.ReadLine()?.ToUpper();
+
+                if (!string.IsNullOrEmpty(operation))
                 {
-                    Console.WriteLine("Давай мути игру:");
-                    string add = Console.ReadLine();
-                    pen.Add(add);
+                    if (operation == "C" || operation == "С")
+                    {
+                        Console.Clear();
+                        Default();
+                        Console.ReadLine();
+                    }
+                      
+                    if (operation == "A" || operation == "Ф")
+                    {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine("Давай мути игру:");
+                            string add = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(add))
+                        {
+                            pen.Add(add);                       
+                            MissionImpossible();
+                            Console.WriteLine();                        
+                        }                                       
+                    }
+
+                    if (operation == "I" || operation == "Ш")
+                    {
+
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("------------------------");                       
+                        foreach (string s in pen)
+                        {
+                            Console.WriteLine(s);
+                        }                                             
+                        Console.WriteLine("------------------------");
+                        Console.ResetColor();
+                    }
+
                 }
+
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"{GetRandom(mockery)}");
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{GetRandom(pen.ToArray())} " + $"({GetRandom(Fatality)})");
                 
-                Randoms(pen, mockery, Fatality);
             }
         }
-        private static void Randoms(List<string> pen, string[] mockery, string [] Fatality)
+        private static string GetRandom(string [] sourse)
         {
-            int rnd1 = Lucky(mockery);           
-            int rnd = Penalties(pen);
-            int rndF = Fatalities(Fatality);
-
-            Console.WriteLine($"{mockery[rnd1]}");
-            Console.WriteLine($"{pen[rnd]} " + $"({Fatality[rndF]})");
+            return sourse[r.Next(sourse.Length)];
         }
-
-        private static void Set(List<string> pen)
+        private static void Tannenbaum()
         {
-            pen.Add("Пинок");
-            pen.Add("Пресс 30 раз");
-            pen.Add("Приседания 40 раз");
-            pen.Add("Двойное наказание");
-            pen.Add("Предидущее наказание");
-            pen.Add("Лещ");
-            pen.Add("Плечо");
-            pen.Add("Плохая тачка");
-            pen.Add("Без зарядов");
-            pen.Add("Удар в пресак");
+            Console.Beep(247, 500);
+            Console.Beep(417, 500);
+            Console.Beep(417, 500);
+            Console.Beep(370, 500);
+            Console.Beep(417, 500);
+            Console.Beep(329, 500);
+            Console.Beep(247, 500);
+            Console.Beep(247, 500);
+            Console.Beep(247, 500);
+            Console.Beep(417, 500);
+            Console.Beep(417, 500);
+            Console.Beep(370, 500);
+            Console.Beep(417, 500);
+            Console.Beep(497, 500);
+            Thread.Sleep(500);
+            Console.Beep(497, 500);
+            Console.Beep(277, 500);
+            Console.Beep(277, 500);
+            Console.Beep(440, 500);
+            Console.Beep(440, 500);
+            Console.Beep(417, 500);
+            Console.Beep(370, 500);
+            Console.Beep(329, 500);
+            Console.Beep(247, 500);
+            Console.Beep(417, 500);
+            Console.Beep(417, 500);
+            Console.Beep(370, 500);
+            Console.Beep(417, 500);
+            Console.Beep(329, 500);
         }
-
-        public static int Penalties(List<string> input)
+        private static void MissionImpossible()
         {
-            int rnd = 0;
-            return rnd = r.Next(input.Count);
-        }
-        public static int Lucky(string[] input)
-        {
-            int rnd = 0;          
-            return rnd = r.Next(input.Length);
-        }
-        public static int Fatalities(string[] input)
-        {        
-            int rndF = 0;
-            return rndF = r.Next(input.Length);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(932, 150);
+            Thread.Sleep(150);
+            Console.Beep(1047, 150);
+            Thread.Sleep(150);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(699, 150);
+            Thread.Sleep(150);
+            Console.Beep(740, 150);
+            Thread.Sleep(150);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(932, 150);
+            Thread.Sleep(150);
+            Console.Beep(1047, 150);
+            Thread.Sleep(150);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(784, 150);
+            Thread.Sleep(300);
+            Console.Beep(699, 150);
+            Thread.Sleep(150);
+            Console.Beep(740, 150);
+            Thread.Sleep(150);
+            Console.Beep(932, 150);
+            Console.Beep(784, 150);
+            Console.Beep(587, 1200);
+            Thread.Sleep(75);
+            Console.Beep(932, 150);
+            Console.Beep(784, 150);
+            Console.Beep(554, 1200);
+            Thread.Sleep(75);
+            Console.Beep(932, 150);
+            Console.Beep(784, 150);
+            Console.Beep(523, 1200);
+            Thread.Sleep(150);
+            Console.Beep(466, 150);
+            Console.Beep(523, 150);
         }
     }
 }
